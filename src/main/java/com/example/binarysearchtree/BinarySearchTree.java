@@ -176,7 +176,12 @@ public class BinarySearchTree<T extends Comparable> implements Tree<T> {
     }
 
     private void preOrder(BinaryTreeNode<T> node, Queue<T> tempList) {
-        // TODO implement pre order iterator
+
+        if (node != null) {
+            preOrder(node.getLeft(), tempList);
+            tempList.add(node.getElement());
+            preOrder(node.getRight(), tempList);
+        }
     }
 
     public Iterator<T> iteratorInOrder() {
@@ -188,7 +193,12 @@ public class BinarySearchTree<T extends Comparable> implements Tree<T> {
     }
 
     private void inOrder(BinaryTreeNode<T> node, Queue<T> tempList) {
-        // TODO implement in order iterator
+
+        if (node != null) {
+            inOrder(node.getLeft(), tempList);
+            tempList.add(node.getElement());
+            inOrder(node.getRight(), tempList);
+        }
     }
 
     public Iterator<T> iteratorPostOrder() {
@@ -200,7 +210,12 @@ public class BinarySearchTree<T extends Comparable> implements Tree<T> {
     }
 
     private void postOrder(BinaryTreeNode<T> node, Queue<T> tempList) {
-        // TODO implement post order iterator
+
+        if (node != null) {
+            postOrder(node.getLeft(), tempList);
+            postOrder(node.getRight(), tempList);
+            tempList.add(node.getElement());
+        }
     }
 
     public Iterator<T> iteratorLevelOrder() {
@@ -213,7 +228,22 @@ public class BinarySearchTree<T extends Comparable> implements Tree<T> {
 
     private void levelOrder(BinaryTreeNode<T> node, Queue<T> tempList) {
 
-        // TODO implement level order iterator
+        Queue<BinaryTreeNode<T>> queue = new LinkedList<>();
+        queue.add(node);
+
+        while (!queue.isEmpty()) {
+
+            BinaryTreeNode<T> tempNode = queue.poll();
+            tempList.add(tempNode.element);
+
+            if (tempNode.left != null) {
+                queue.add(tempNode.left);
+            }
+
+            if (tempNode.right != null) {
+                queue.add(tempNode.right);
+            }
+        }
 
     }
 
